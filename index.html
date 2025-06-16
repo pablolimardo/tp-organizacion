@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Integrador - Organización Empresarial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .utn-blue { color: #005f9e; }
+        .utn-bg-blue { background-color: #005f9e; }
+        .utn-border-blue { border-color: #005f9e; }
+        .section-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #1a202c;
+            border-bottom: 3px solid #005f9e;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .bpmn-shape {
+            stroke: #4a5568;
+            stroke-width: 2;
+            fill: #f7fafc;
+        }
+        .bpmn-task { fill: #ebf8ff; stroke: #4299e1; }
+        .bpmn-event-start { fill: #c6f6d5; stroke: #38a169;}
+        .bpmn-event-end { fill: #fed7d7; stroke: #c53030;}
+        .bpmn-gateway { fill: #fefcbf; stroke: #d69e2e; }
+        .bpmn-flow {
+            stroke: #4a5568;
+            stroke-width: 1.5;
+            fill: none;
+            marker-end: url(#arrowhead);
+        }
+        .bpmn-message-flow {
+            stroke: #4a5568;
+            stroke-width: 1.5;
+            stroke-dasharray: 8 4;
+            fill: none;
+            marker-end: url(#arrowhead);
+            marker-start: url(#message-start);
+        }
+        .bpmn-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            fill: #2d3748;
+            text-anchor: middle;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <!-- Header -->
+        <header class="text-center mb-12 p-6 bg-white rounded-lg shadow-md">
+            <img src="https://www.utn.edu.ar/images/logo-utn.png" alt="[Logo de la UTN]" class="mx-auto h-24 mb-4">
+            <h1 class="text-4xl font-bold utn-blue">Tecnicatura Universitaria en Programación</h1>
+            <p class="text-2xl text-gray-600 mt-2">Organización Empresarial</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="space-y-16">
+
+            <!-- Project Info -->
+            <section class="card p-8 text-center">
+                <h2 class="text-3xl font-bold mb-4">Trabajo Práctico Integrador</h2>
+                <p class="text-xl text-gray-700 mb-6">Simulación de Proceso de Negocio con BPMN e IA</p>
+                <div class="border-t border-gray-200 pt-6">
+                    <h3 class="text-lg font-semibold">Integrantes del Grupo:</h3>
+                    <p class="text-gray-600">Juan Pérez, María Rodriguez, Carlos Gomez</p>
+                    <h3 class="text-lg font-semibold mt-4">Profesor:</h3>
+                    <p class="text-gray-600">Ing. Ricardo Fernandez</p>
+                    <h3 class="text-lg font-semibold mt-4">Fecha de Entrega:</h3>
+                    <p class="text-gray-600">16 de Junio de 2025</p>
+                </div>
+            </section>
+
+            <!-- 1. Definición del Proceso -->
+            <section id="proceso">
+                <h2 class="section-title">1. Definición del Proceso</h2>
+                <div class="card p-8">
+                    <p class="text-lg leading-relaxed">
+                        El proceso seleccionado para este trabajo es el de <strong>"Atención al Cliente para Consultas de Productos"</strong>, implementado a través de un chatbot en un e-commerce. Este proceso es fundamental para la experiencia del usuario, ya que proporciona respuestas rápidas a las dudas más comunes, mejorando la satisfacción y agilizando el ciclo de venta.
+                    </p>
+                    <h3 class="text-xl font-semibold mt-6 mb-4">Etapas del Proceso:</h3>
+                    <ul class="list-disc list-inside space-y-2 text-lg">
+                        <li><strong>Recepción y Análisis de la Consulta:</strong> El cliente inicia la interacción y el chatbot interpreta su solicitud.</li>
+                        <li><strong>Búsqueda de Información:</strong> El sistema busca la respuesta en una base de conocimiento predefinida.</li>
+                        <li><strong>Entrega de Respuesta:</strong> El chatbot proporciona la información solicitada al cliente.</li>
+                        <li><strong>Verificación y Cierre:</strong> Se consulta al cliente si su duda fue resuelta o si necesita más ayuda.</li>
+                        <li><strong>Escalamiento a un Humano:</strong> Si el chatbot no puede resolver la consulta, la transfiere a un asesor de atención al cliente.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. Modelado en BPMN -->
+            <section id="bpmn">
+                <h2 class="section-title">2. Diagrama del Proceso (BPMN)</h2>
+                <div class="card p-8 overflow-x-auto">
+                    <h3 class="text-2xl font-semibold text-center mb-6">Diagrama de Flujo: Atención al Cliente</h3>
+                    <svg width="1000" height="600" viewBox="0 0 1000 600" class="mx-auto">
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#4a5568"/>
+                            </marker>
+                            <marker id="message-start" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                                <circle cx="5" cy="3.5" r="3" stroke="#4a5568" fill="white"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Pool y Lanes -->
+                        <g>
+                            <rect x="10" y="10" width="980" height="580" fill="#f9fafb" stroke="#d1d5db" stroke-width="1" rx="15"></rect>
+                            <text x="35" y="300" transform="rotate(-90, 35, 300)" class="bpmn-label" font-weight="bold" font-size="16">Proceso de Atención</text>
+                            
+                            <line x1="60" y1="220" x2="990" y2="220" stroke="#d1d5db" stroke-width="1.5"/>
+                            <text x="85" y="115" class="bpmn-label" font-weight="bold">Cliente</text>
+                            
+                            <line x1="60" y1="420" x2="990" y2="420" stroke="#d1d5db" stroke-width="1.5"/>
+                            <text x="85" y="320" class="bpmn-label" font-weight="bold">Chatbot</text>
+                            
+                            <text x="85" y="510" class="bpmn-label" font-weight="bold">Asesor Humano</text>
+                        </g>
+                        
+                        <!-- Flujo -->
+                        <!-- Cliente -->
+                        <g>
+                            <circle cx="120" cy="110" r="15" class="bpmn-event-start"></circle>
+                            <rect x="180" y="85" width="100" height="50" rx="10" class="bpmn-task"></rect>
+                            <text x="230" y="112.5" class="bpmn-label">Realiza consulta</text>
+                            <path d="M135,110 H180" class="bpmn-flow"/>
+                        </g>
+
+                        <!-- Chatbot -->
+                        <g>
+                             <!-- Mensaje del Cliente al Chatbot -->
+                            <path d="M230,135 V280" class="bpmn-message-flow"/>
+                            
+                            <circle cx="230" cy="300" r="15" fill="white" stroke="#4a5568">
+                                <path d="M224 297 L224 303 L236 303 L236 297 Z M224 297 L230 301 L236 297" fill="none" stroke="#4a5568" stroke-width="1.2"/>
+                            </circle>
+                            <text x="230" y="325" class="bpmn-label">Recibe consulta</text>
+                            
+                            <rect x="300" y="275" width="100" height="50" rx="10" class="bpmn-task"></rect>
+                            <text x="350" y="302.5" class="bpmn-label">Analiza consulta</text>
+                            <path d="M245,300 H300" class="bpmn-flow"/>
+                            
+                            <path d="M400,300 H440" class="bpmn-flow"/>
+                            <polygon points="440,275 465,300 440,325 415,300" class="bpmn-gateway"/>
+                            <text x="440" y="340" class="bpmn-label">¿Consulta válida?</text>
+                            
+                            <path d="M465,300 H520" class="bpmn-flow"/>
+                            <text x="492.5" y="295" class="bpmn-label">Sí</text>
+                            
+                            <rect x="520" y="275" width="100" height="50" rx="10" class="bpmn-task"></rect>
+                            <text x="570" y="295" class="bpmn-label">Busca en Base</text>
+                            <text x="570" y="310" class="bpmn-label">de Conocimiento</text>
+                            
+                            <path d="M620,300 H660" class="bpmn-flow"/>
+                            <polygon points="660,275 685,300 660,325 635,300" class="bpmn-gateway"/>
+                            <text x="660" y="340" class="bpmn-label">¿Encuentra info?</text>
+                            
+                            <!-- Flujo de Respuesta Exitosa -->
+                            <path d="M685,300 H740" class="bpmn-flow"/>
+                            <text x="712.5" y="295" class="bpmn-label">Sí</text>
+                            <rect x="740" y="275" width="100" height="50" rx="10" class="bpmn-task"></rect>
+                            <text x="790" y="302.5" class="bpmn-label">Genera respuesta</text>
+                            <path d="M790,275 V135" class="bpmn-message-flow"/>
+                            
+                            <!-- Flujo de retorno del cliente -->
+                            <text x="790" y="100" class="bpmn-label">¿Otra consulta?</text>
+                            <polygon points="790,110 815,135 790,160 765,135" class="bpmn-gateway"/>
+                            <path d="M790,160 V220" class="bpmn-flow" /> <!-- Abajo hacia el fin -->
+                             <path d="M765,135 H280 V85" class="bpmn-flow" /> <!-- Izquierda para otra consulta -->
+                            <text x="522.5" y="130" class="bpmn-label">Sí</text>
+                             <text x="790" y="180" class="bpmn-label">No</text>
+                            <circle cx="790" cy="240" r="15" class="bpmn-event-end"></circle>
+
+                            <!-- Flujo de Escalamiento -->
+                            <path d="M660,325 V380 H350 V375" class="bpmn-flow"/>
+                            <text x="505" y="375" class="bpmn-label">No</text>
+                            
+                             <path d="M440,275 V240 H790 V220" class="bpmn-flow"/>
+                             <text x="615" y="235" class="bpmn-label">No</text>
+                             <rect x="740" y="360" width="100" height="50" rx="10" class="bpmn-task"></rect>
+                             <text x="790" y="380" class="bpmn-label">Informa que no</text>
+                             <text x="790" y="395" class="bpmn-label">puede responder</text>
+
+                            <path d="M350,375 H 740" class="bpmn-flow"/>
+
+                            <!-- Flujo al asesor -->
+                             <path d="M790,410 V460" class="bpmn-message-flow"/>
+                             <rect x="740" y="460" width="100" height="50" rx="10" class="bpmn-task"></rect>
+                             <text x="790" y="487.5" class="bpmn-label">Atiende consulta</text>
+                             <path d="M840,485 H900" class="bpmn-flow"/>
+                             <circle cx="920" cy="485" r="15" class="bpmn-event-end"></circle>
+
+                        </g>
+                    </svg>
+
+                    <div class="mt-8 text-left">
+                        <h4 class="text-xl font-semibold mb-4">Explicación de los Componentes</h4>
+                        <ul class="space-y-4">
+                            <li><strong class="utn-blue">Pool y Lanes:</strong> El <code class="bg-gray-200 p-1 rounded">Pool</code> "Proceso de Atención" encapsula todo el proceso. Los <code class="bg-gray-200 p-1 rounded">Lanes</code> (carriles) "Cliente", "Chatbot" y "Asesor Humano" delimitan claramente las responsabilidades y acciones de cada participante.</li>
+                            <li><strong class="utn-blue">Eventos:</strong>
+                                <ul class="list-disc list-inside ml-4 mt-2">
+                                    <li><span class="inline-block w-4 h-4 rounded-full bg-green-200 border border-green-600 mr-2 align-middle"></span><strong>Evento de Inicio:</strong> Marca el comienzo del proceso cuando el cliente envía una consulta.</li>
+                                    <li><span class="inline-block w-4 h-4 rounded-full bg-red-200 border border-red-600 mr-2 align-middle"></span><strong>Evento de Fin:</strong> Indica la finalización del proceso, ya sea porque la consulta fue resuelta o porque fue atendida por un humano.</li>
+                                </ul>
+                            </li>
+                            <li><strong class="utn-blue">Actividades:</strong> Los rectángulos de esquinas redondeadas (ej. "Realiza consulta", "Analiza consulta") representan las tareas o trabajos realizados por cada participante.</li>
+                            <li><strong class="utn-blue">Compuertas (Gateways):</strong> Los rombos representan puntos de decisión que alteran el flujo del proceso. Por ejemplo, se evalúa si la consulta es válida y si se encuentra información en la base de datos, bifurcando el camino según el resultado.</li>
+                            <li><strong class="utn-blue">Flujos:</strong>
+                                <ul class="list-disc list-inside ml-4 mt-2">
+                                    <li><strong>Flujo de Secuencia (Línea continua):</strong> Conecta los elementos en orden, mostrando la dirección del proceso dentro de un mismo lane.</li>
+                                    <li><strong>Flujo de Mensaje (Línea discontinua):</strong> Representa la comunicación entre diferentes participantes (lanes), como el envío de la consulta del cliente al chatbot o la escalada del chatbot al asesor.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 3. Simulación del Chatbot -->
+            <section id="chatbot">
+                <h2 class="section-title">3. Simulación de Interacción con Chatbot</h2>
+                <div class="card p-8">
+                     <p class="mb-6 text-lg">A continuación, se presentan 5 preguntas de prueba para evaluar el funcionamiento del chatbot, junto con las respuestas programadas.</p>
+                     <div class="space-y-6">
+                        <!-- Pregunta 1 -->
+                        <div class="p-4 border-l-4 utn-border-blue bg-blue-50 rounded-r-lg">
+                            <p class="font-bold text-gray-700">Pregunta 1: ¿Qué modelos de celulares tienen?</p>
+                            <p class="mt-2 text-gray-600"><strong class="utn-blue">Chatbot:</strong> ¡Hola! Tenemos una gran variedad de modelos. Los más populares son el "Galaxy Pro", el "Pixel Aura" y el "iPhone Max". ¿Te gustaría saber las especificaciones de alguno en particular?</p>
+                        </div>
+                         <!-- Pregunta 2 -->
+                        <div class="p-4 border-l-4 utn-border-blue bg-blue-50 rounded-r-lg">
+                            <p class="font-bold text-gray-700">Pregunta 2: ¿Cuál es el precio del Galaxy Pro?</p>
+                            <p class="mt-2 text-gray-600"><strong class="utn-blue">Chatbot:</strong> El "Galaxy Pro" tiene un precio de $850.000 ARS. ¿Querés que te comparta el enlace para verlo en la tienda?</p>
+                        </div>
+                         <!-- Pregunta 3 -->
+                        <div class="p-4 border-l-4 utn-border-blue bg-blue-50 rounded-r-lg">
+                            <p class="font-bold text-gray-700">Pregunta 3: ¿Tienen stock del Pixel Aura en color negro?</p>
+                            <p class="mt-2 text-gray-600"><strong class="utn-blue">Chatbot:</strong> ¡Sí! Afortunadamente, tenemos stock del "Pixel Aura" en color negro. Está listo para envío inmediato. ¿Te gustaría agregarlo a tu carrito?</p>
+                        </div>
+                         <!-- Pregunta 4 -->
+                        <div class="p-4 border-l-4 utn-border-blue bg-blue-50 rounded-r-lg">
+                            <p class="font-bold text-gray-700">Pregunta 4: ¿Qué garantía tiene el iPhone Max?</p>
+                            <p class="mt-2 text-gray-600"><strong class="utn-blue">Chatbot:</strong> Todos nuestros productos nuevos, incluyendo el "iPhone Max", cuentan con una garantía oficial de 12 meses directamente con el fabricante.</p>
+                        </div>
+                        <!-- Pregunta 5 - Escalamiento -->
+                        <div class="p-4 border-l-4 border-yellow-500 bg-yellow-50 rounded-r-lg">
+                            <p class="font-bold text-gray-700">Pregunta 5: ¿Puedo pagar en 18 cuotas con tarjeta de un banco que no sea de Argentina?</p>
+                            <p class="mt-2 text-gray-600"><strong class="utn-blue">Chatbot:</strong> No tengo información específica sobre financiaciones con tarjetas internacionales. Para darte una respuesta precisa, te voy a comunicar con uno de nuestros asesores humanos. Por favor, aguardá un momento.</p>
+                        </div>
+                     </div>
+                </div>
+            </section>
+            
+            <!-- 4. Reflexión Final -->
+            <section id="reflexion">
+                <h2 class="section-title">4. Reflexión Final y Aprendizajes</h2>
+                <div class="card p-8">
+                    <h3 class="text-xl font-semibold mb-3">Dificultades Encontradas</h3>
+                    <p class="mb-6 leading-relaxed">Una de las principales dificultades fue definir el nivel de detalle adecuado para el diagrama BPMN. Es un desafío balancear la simplicidad para que sea comprensible, con la inclusión de todos los pasos y decisiones críticas para que represente fielmente el proceso. Además, prever todas las posibles consultas de los usuarios para la base de conocimiento del chatbot y diseñar un flujo de escalamiento a humanos que sea fluido y no frustrante, representó un reto de planificación importante.</p>
+                    
+                    <h3 class="text-xl font-semibold mb-3">Aprendizajes Obtenidos</h3>
+                    <p class="leading-relaxed">Este trabajo nos permitió aplicar de forma práctica los conceptos teóricos de gestión por procesos. Comprendimos la importancia de modelar un proceso antes de intentar automatizarlo, ya que el diagrama BPMN actúa como un mapa fundamental para el desarrollo de software. Aprendimos a utilizar la notación estándar para comunicarnos de manera efectiva y sin ambigüedades sobre los flujos de trabajo. Finalmente, este proyecto nos dio una visión clara de cómo la tecnología, como los chatbots, puede integrarse en los procesos de negocio para mejorar la eficiencia y la satisfacción del cliente, un conocimiento invaluable para nuestra futura carrera como programadores.</p>
+                </div>
+            </section>
+
+             <!-- 5. Video Explicativo -->
+            <section id="video">
+                <h2 class="section-title">5. Enlace al Video Explicativo</h2>
+                <div class="card p-8 text-center">
+                    <p class="text-lg mb-4">En el siguiente enlace se puede encontrar el video explicativo del trabajo, donde detallamos el proceso, el diagrama y la demostración del chatbot.</p>
+                    <a href="#" class="inline-block utn-bg-blue text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">
+                        Ver Video en YouTube
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
