@@ -32,29 +32,6 @@
         .card:hover {
             transform: translateY(-5px);
         }
-        .bpmn-shape {
-            stroke: #4a5568;
-            stroke-width: 2;
-            fill: #f7fafc;
-        }
-        .bpmn-task { fill: #ebf8ff; stroke: #4299e1; }
-        .bpmn-event-start { fill: #c6f6d5; stroke: #38a169;}
-        .bpmn-event-end { fill: #fed7d7; stroke: #c53030;}
-        .bpmn-gateway { fill: #fefcbf; stroke: #d69e2e; }
-        .bpmn-flow {
-            stroke: #4a5568;
-            stroke-width: 1.5;
-            fill: none;
-            marker-end: url(#arrowhead);
-        }
-        .bpmn-message-flow {
-            stroke: #4a5568;
-            stroke-width: 1.5;
-            stroke-dasharray: 8 4;
-            fill: none;
-            marker-end: url(#arrowhead);
-            marker-start: url(#message-start);
-        }
         .bpmn-label {
             font-family: 'Inter', sans-serif;
             font-size: 12px;
@@ -114,124 +91,23 @@
                 <h2 class="section-title">2. Diagrama del Proceso (BPMN)</h2>
                 <div class="card p-8 overflow-x-auto">
                     <h3 class="text-2xl font-semibold text-center mb-6">Diagrama de Flujo: Atención al Cliente</h3>
-                    <svg width="1000" height="600" viewBox="0 0 1000 600" class="mx-auto">
-                        <defs>
-                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
-                                <polygon points="0 0, 10 3.5, 0 7" fill="#4a5568"/>
-                            </marker>
-                            <marker id="message-start" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-                                <circle cx="5" cy="3.5" r="3" stroke="#4a5568" fill="white"/>
-                            </marker>
-                        </defs>
-
-                        <!-- Pool y Lanes -->
-                        <g>
-                            <rect x="10" y="10" width="980" height="580" fill="#f9fafb" stroke="#d1d5db" stroke-width="1" rx="15"></rect>
-                            <text x="35" y="300" transform="rotate(-90, 35, 300)" class="bpmn-label" font-weight="bold" font-size="16">Proceso de Atención</text>
-                            
-                            <line x1="60" y1="220" x2="990" y2="220" stroke="#d1d5db" stroke-width="1.5"/>
-                            <text x="85" y="115" class="bpmn-label" font-weight="bold">Cliente</text>
-                            
-                            <line x1="60" y1="420" x2="990" y2="420" stroke="#d1d5db" stroke-width="1.5"/>
-                            <text x="85" y="320" class="bpmn-label" font-weight="bold">Chatbot</text>
-                            
-                            <text x="85" y="510" class="bpmn-label" font-weight="bold">Asesor Humano</text>
-                        </g>
-                        
-                        <!-- Flujo -->
-                        <!-- Cliente -->
-                        <g>
-                            <circle cx="120" cy="110" r="15" class="bpmn-event-start"></circle>
-                            <rect x="180" y="85" width="100" height="50" rx="10" class="bpmn-task"></rect>
-                            <text x="230" y="112.5" class="bpmn-label">Realiza consulta</text>
-                            <path d="M135,110 H180" class="bpmn-flow"/>
-                        </g>
-
-                        <!-- Chatbot -->
-                        <g>
-                             <!-- Mensaje del Cliente al Chatbot -->
-                            <path d="M230,135 V280" class="bpmn-message-flow"/>
-                            
-                            <circle cx="230" cy="300" r="15" fill="white" stroke="#4a5568">
-                                <path d="M224 297 L224 303 L236 303 L236 297 Z M224 297 L230 301 L236 297" fill="none" stroke="#4a5568" stroke-width="1.2"/>
-                            </circle>
-                            <text x="230" y="325" class="bpmn-label">Recibe consulta</text>
-                            
-                            <rect x="300" y="275" width="100" height="50" rx="10" class="bpmn-task"></rect>
-                            <text x="350" y="302.5" class="bpmn-label">Analiza consulta</text>
-                            <path d="M245,300 H300" class="bpmn-flow"/>
-                            
-                            <path d="M400,300 H440" class="bpmn-flow"/>
-                            <polygon points="440,275 465,300 440,325 415,300" class="bpmn-gateway"/>
-                            <text x="440" y="340" class="bpmn-label">¿Consulta válida?</text>
-                            
-                            <path d="M465,300 H520" class="bpmn-flow"/>
-                            <text x="492.5" y="295" class="bpmn-label">Sí</text>
-                            
-                            <rect x="520" y="275" width="100" height="50" rx="10" class="bpmn-task"></rect>
-                            <text x="570" y="295" class="bpmn-label">Busca en Base</text>
-                            <text x="570" y="310" class="bpmn-label">de Conocimiento</text>
-                            
-                            <path d="M620,300 H660" class="bpmn-flow"/>
-                            <polygon points="660,275 685,300 660,325 635,300" class="bpmn-gateway"/>
-                            <text x="660" y="340" class="bpmn-label">¿Encuentra info?</text>
-                            
-                            <!-- Flujo de Respuesta Exitosa -->
-                            <path d="M685,300 H740" class="bpmn-flow"/>
-                            <text x="712.5" y="295" class="bpmn-label">Sí</text>
-                            <rect x="740" y="275" width="100" height="50" rx="10" class="bpmn-task"></rect>
-                            <text x="790" y="302.5" class="bpmn-label">Genera respuesta</text>
-                            <path d="M790,275 V135" class="bpmn-message-flow"/>
-                            
-                            <!-- Flujo de retorno del cliente -->
-                            <text x="790" y="100" class="bpmn-label">¿Otra consulta?</text>
-                            <polygon points="790,110 815,135 790,160 765,135" class="bpmn-gateway"/>
-                            <path d="M790,160 V220" class="bpmn-flow" /> <!-- Abajo hacia el fin -->
-                             <path d="M765,135 H280 V85" class="bpmn-flow" /> <!-- Izquierda para otra consulta -->
-                            <text x="522.5" y="130" class="bpmn-label">Sí</text>
-                             <text x="790" y="180" class="bpmn-label">No</text>
-                            <circle cx="790" cy="240" r="15" class="bpmn-event-end"></circle>
-
-                            <!-- Flujo de Escalamiento -->
-                            <path d="M660,325 V380 H350 V375" class="bpmn-flow"/>
-                            <text x="505" y="375" class="bpmn-label">No</text>
-                            
-                             <path d="M440,275 V240 H790 V220" class="bpmn-flow"/>
-                             <text x="615" y="235" class="bpmn-label">No</text>
-                             <rect x="740" y="360" width="100" height="50" rx="10" class="bpmn-task"></rect>
-                             <text x="790" y="380" class="bpmn-label">Informa que no</text>
-                             <text x="790" y="395" class="bpmn-label">puede responder</text>
-
-                            <path d="M350,375 H 740" class="bpmn-flow"/>
-
-                            <!-- Flujo al asesor -->
-                             <path d="M790,410 V460" class="bpmn-message-flow"/>
-                             <rect x="740" y="460" width="100" height="50" rx="10" class="bpmn-task"></rect>
-                             <text x="790" y="487.5" class="bpmn-label">Atiende consulta</text>
-                             <path d="M840,485 H900" class="bpmn-flow"/>
-                             <circle cx="920" cy="485" r="15" class="bpmn-event-end"></circle>
-
-                        </g>
-                    </svg>
+                    
+                    <!-- Imagen del diagrama BPMN -->
+                    <img src="chatbot.jpg" alt="Diagrama BPMN del proceso de atención al cliente con chatbot" class="mx-auto rounded-lg shadow-lg border border-gray-200">
 
                     <div class="mt-8 text-left">
                         <h4 class="text-xl font-semibold mb-4">Explicación de los Componentes</h4>
                         <ul class="space-y-4">
-                            <li><strong class="utn-blue">Pool y Lanes:</strong> El <code class="bg-gray-200 p-1 rounded">Pool</code> "Proceso de Atención" encapsula todo el proceso. Los <code class="bg-gray-200 p-1 rounded">Lanes</code> (carriles) "Cliente", "Chatbot" y "Asesor Humano" delimitan claramente las responsabilidades y acciones de cada participante.</li>
+                            <li><strong class="utn-blue">Pool y Lanes:</strong> El <code class="bg-gray-200 p-1 rounded">Pool</code> encapsula todo el proceso. Los <code class="bg-gray-200 p-1 rounded">Lanes</code> (carriles) "Cliente", "Chatbot" y "Asesor Humano" delimitan claramente las responsabilidades de cada participante.</li>
                             <li><strong class="utn-blue">Eventos:</strong>
                                 <ul class="list-disc list-inside ml-4 mt-2">
-                                    <li><span class="inline-block w-4 h-4 rounded-full bg-green-200 border border-green-600 mr-2 align-middle"></span><strong>Evento de Inicio:</strong> Marca el comienzo del proceso cuando el cliente envía una consulta.</li>
-                                    <li><span class="inline-block w-4 h-4 rounded-full bg-red-200 border border-red-600 mr-2 align-middle"></span><strong>Evento de Fin:</strong> Indica la finalización del proceso, ya sea porque la consulta fue resuelta o porque fue atendida por un humano.</li>
+                                    <li><strong>Evento de Inicio:</strong> Marca el comienzo del proceso cuando el cliente envía una consulta.</li>
+                                    <li><strong>Evento de Fin:</strong> Indica la finalización del proceso, ya sea porque la consulta fue resuelta o porque fue atendida por un humano.</li>
                                 </ul>
                             </li>
-                            <li><strong class="utn-blue">Actividades:</strong> Los rectángulos de esquinas redondeadas (ej. "Realiza consulta", "Analiza consulta") representan las tareas o trabajos realizados por cada participante.</li>
-                            <li><strong class="utn-blue">Compuertas (Gateways):</strong> Los rombos representan puntos de decisión que alteran el flujo del proceso. Por ejemplo, se evalúa si la consulta es válida y si se encuentra información en la base de datos, bifurcando el camino según el resultado.</li>
-                            <li><strong class="utn-blue">Flujos:</strong>
-                                <ul class="list-disc list-inside ml-4 mt-2">
-                                    <li><strong>Flujo de Secuencia (Línea continua):</strong> Conecta los elementos en orden, mostrando la dirección del proceso dentro de un mismo lane.</li>
-                                    <li><strong>Flujo de Mensaje (Línea discontinua):</strong> Representa la comunicación entre diferentes participantes (lanes), como el envío de la consulta del cliente al chatbot o la escalada del chatbot al asesor.</li>
-                                </ul>
-                            </li>
+                            <li><strong class="utn-blue">Actividades:</strong> Los rectángulos representan las tareas o trabajos realizados por cada participante (ej. "Analiza la consulta").</li>
+                            <li><strong class="utn-blue">Compuertas (Gateways):</strong> Los rombos representan puntos de decisión. En el diagrama, se evalúa si la consulta es válida y si se encuentra información, bifurcando el camino según el resultado.</li>
+                            <li><strong class="utn-blue">Flujos:</strong> Las flechas conectan los elementos en orden, mostrando la dirección del proceso y la comunicación entre los diferentes participantes.</li>
                         </ul>
                     </div>
                 </div>
